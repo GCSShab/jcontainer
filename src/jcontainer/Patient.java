@@ -14,11 +14,24 @@ public class Patient {
     private final int iep;
     private final int uf;
 
+    /****************
+     * Un falicitateur pour afficher les données de la classes.
+     * A utiliser pour des besoin de debuggage par exemple.
+     * @return 
+     ****************/
     @Override
     public String toString() {
         return "Patient{" + "ipp=" + ipp + ", nomcomplet=" + nomcomplet + ", nom=" + nom + ", prenom=" + prenom + ", ddn=" + ddn + ", iep=" + iep + ", uf=" + uf + '}';
     }
 
+    /***********************************
+     * Constructeur de la classe Patient
+     * @param ipp
+     * @param nomcomplet
+     * @param ddn
+     * @param iep
+     * @param uf 
+     ***********************************/
     public Patient(String ipp, String nomcomplet, String ddn, int iep, int uf) {
         this.ipp = ipp;
         this.nomcomplet = nomcomplet;
@@ -30,6 +43,9 @@ public class Patient {
         this.uf = uf;
     }
 
+    /*
+    Ensemble des accesseurs (getters) pour acceder aux variables (attributs) de la classe Patient
+    */
     public String getIpp() {
         return ipp;
     }
