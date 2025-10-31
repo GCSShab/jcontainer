@@ -18,6 +18,7 @@ public class Jcontainer {
     une chaine séparé par une "," et un espace
     Plus tard on s'interessera plutôt a lire un fichier CSV
     plutôt que de fixer les différents objets.
+    Ci dessous on va définir 12 patients différents...
 */
 String p1="9000005555;GOSLING, James;11/09/1962;691999455;7401";
 String p2="71234980;NAUGHTON, Patrick;24/12/1995;691763984;0991";
@@ -35,6 +36,7 @@ String p12 = "8000023241;MCAFEE, John;01/01/1987;691765441;1010";
 
 List<String> lstPatientsStr=new ArrayList<>(); //liste liée de chaines de caractères
 /*
+Un ArrayList est un tableau dynamique de type <XXXX> qui contient des éléments stockés dasn des cases contigues
 +-------+-------+-------+-------+-------+
 | Case1 | Case2 | Case3 | Case4 | Case5 |
 +-------+-------+-------+-------+-------+
@@ -56,6 +58,7 @@ Px est un objet de type Patient
 */
 Map<String,Patient> mapPatientObj=new HashMap(); //map <=> association cle/valeur
 /*
+Un HashMap est un tableau dynamique associatif de type <cle,valeur> qui contient des éléments stockés dans des cases contigues par associations clé => Valeurs
 +-----------+-----------+
 |   Clé     |  Valeur   |
 +-----------+-----------+
@@ -69,9 +72,11 @@ Map<String,Patient> mapPatientObj=new HashMap(); //map <=> association cle/valeu
 
     /**
      * @param args the command line arguments
+     * Méthode main principale
      */
-    public static void main(String[] args) {
-       new Jcontainer(args);
+    public static void main(String[] args) 
+    {
+       new Jcontainer(args); //appeler le constructeur par defaut pour éviter la manipulation de variable statique
     }
 
     /******************
@@ -80,7 +85,7 @@ Map<String,Patient> mapPatientObj=new HashMap(); //map <=> association cle/valeu
      ******************/
     public Jcontainer(String[] args) 
     {
-        stringInList();   
+        stringInList(); //appeler la fonction StringInList()  
     }
 
     /**************************
@@ -91,7 +96,7 @@ Map<String,Patient> mapPatientObj=new HashMap(); //map <=> association cle/valeu
     {
         
          System.out.println("On va inserer les chaines p1 a p12 dans un conteneur ArrayList");
-         lstPatientsStr.add(p1);
+         lstPatientsStr.add(p1);  // on utilise la méthode add de ArrayList pour inserer un nouvel enregistrement chaine de caractères
          lstPatientsStr.add(p2);
          lstPatientsStr.add(p3);
          lstPatientsStr.add(p4);
@@ -106,6 +111,7 @@ Map<String,Patient> mapPatientObj=new HashMap(); //map <=> association cle/valeu
 
          System.out.println("C'est fait !");
          System.out.println("On va lister les chaines p1 a P12 qui se trouvent dans la liste");
+         //definition de la boucle d'itération dans la liste de chaines
          for (String patient:lstPatientsStr)
          {
              System.out.println(patient); //afficher les chaines
@@ -114,16 +120,17 @@ Map<String,Patient> mapPatientObj=new HashMap(); //map <=> association cle/valeu
                 On va découper ces chaines pour les transformer en objets
                 cette technique se nomme la "Serialisation", la technique
                 inverse se nomme la "Deserialisation"
+             La méthode stringToListPatien va permettre de gere cette découpe...
              */
              stringToListPatient(patient);
          }
          
        //afficher les objets
-        System.out.println("Affichage des Prenom / Nom apres serialisation en objet");
+        System.out.println("Affichage des IPP => Prenom / Nom apres serialisation en objet");
        byte compteur=1;
          for (Patient p:lstPatientsObj)
          {
-             System.out.println("Nom du patient Num "+compteur+" : "+p.getPrenom()+" / "+p.getNom());
+             System.out.println("IPP = "+p.getIpp()+" => Nom du patient Num "+compteur+" : "+p.getPrenom()+" / "+p.getNom());
              compteur++;
          }
          
@@ -147,13 +154,14 @@ Map<String,Patient> mapPatientObj=new HashMap(); //map <=> association cle/valeu
          
          //rechercher par nom exemple WOSNIAK
          System.out.println("rechercher par nom exemple : WOSNIAK");
+         //on itére dans la map (verifier tous les eneregistrements
          for (Map.Entry<String, Patient> entry : mapPatientObj.entrySet()) 
          {
-            String cle = entry.getKey();
-            Patient valeur = entry.getValue();
-            if (valeur.getNom().compareToIgnoreCase("WOSNIAK")==0)
+            String cle = entry.getKey(); //récupérer la clé
+            Patient valeur = entry.getValue(); //recupérer l'objet valeur de type Patient
+            if (valeur.getNom().compareToIgnoreCase("WOSNIAK")==0)  //comparer chaque valeur avec le nom
             {
-                System.out.println("IPP="+cle+" => "+valeur.toString());
+                System.out.println("IPP="+cle+" => "+valeur.toString()); //si correspond => afficher sur l'écran
             }
         }
     }
@@ -168,11 +176,8 @@ Map<String,Patient> mapPatientObj=new HashMap(); //map <=> association cle/valeu
      */
     private void stringToListPatient(String patient) 
     {
-        String[] patTabStat=patient.split(";",-1);
-        lstPatientsObj.add(new Patient(patTabStat[0], patTabStat[1], patTabStat[2], Integer.parseInt(patTabStat[3],10), Integer.parseInt(patTabStat[4],10)));
+        String[] patTabStat=patient.split(";",-1); //split permet d'éclater une chaine en prenant en compte un séparateur ici le ";"
+        lstPatientsObj.add(new Patient(patTabStat[0], patTabStat[1], patTabStat[2], Integer.parseInt(patTabStat[3],10), Integer.parseInt(patTabStat[4],10)));//ajouter l'objet dans la liste d'objets.
     }
     
-
-    
-    
-}
+}//fin du programme

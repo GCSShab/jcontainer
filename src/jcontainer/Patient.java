@@ -5,7 +5,7 @@ package jcontainer;
  * @author tondeur-h
  */
 public class Patient {
-   //9001234567;CHVDSI, Herve;12/01/1970;691123456;0991
+   //9001234567;CHVDSI, Herve;12/01/1970;691123456;0991 <= exemple de ligne
     private final String ipp;
     private final String nomcomplet;
     private final String nom;
@@ -14,11 +14,11 @@ public class Patient {
     private final int iep;
     private final int uf;
 
-    /****************
+    /**********************************************************
      * Un falicitateur pour afficher les données de la classes.
      * A utiliser pour des besoin de debuggage par exemple.
      * @return 
-     ****************/
+     **********************************************************/
     @Override
     public String toString() {
         return "Patient{" + "ipp=" + ipp + ", nomcomplet=" + nomcomplet + ", nom=" + nom + ", prenom=" + prenom + ", ddn=" + ddn + ", iep=" + iep + ", uf=" + uf + '}';
@@ -26,6 +26,7 @@ public class Patient {
 
     /***********************************
      * Constructeur de la classe Patient
+     * Sera utiliser pour instancier les objets patients et ajouter dans notre tableau dynamique et notre map dynamique.
      * @param ipp
      * @param nomcomplet
      * @param ddn
